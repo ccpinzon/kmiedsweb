@@ -1,3 +1,3 @@
 <?php
-echo 'hola Mundo';
+include_once "controllers/config.php"
 ?>
