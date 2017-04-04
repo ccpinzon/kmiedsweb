@@ -17,6 +17,7 @@ if ($result->num_rows > 0) {
  }
  $row = $result->fetch_array(MYSQLI_ASSOC);
  //echo password_hash("user",PASSWORD_DEFAULT).'<BR>';
+ //echo $password;
  if (password_verify($password, $row['hash_password'])) { 
  
     $_SESSION['loggedin'] = true;
@@ -26,7 +27,7 @@ if ($result->num_rows > 0) {
 
     //echo "Bienvenido! " . $_SESSION['username'];
     //echo "<br><br><a href=panel-control.php>Panel de Control</a>"; 
-    echo "<meta http-equiv='refresh' content='0;URL=dashboard.php' />";
+    echo "<meta http-equiv='refresh' content='0;URL=../dashboard.php' />";
 
  } else { 
    echo "Username o Password estan incorrectos.";
