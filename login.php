@@ -4,6 +4,7 @@
 
 <head>
     <title>Iniciar Sesion - Admins - Mi Eds App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
        <link rel="stylesheet" type="text/css" href="css/mystyle.css">
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/materialize.min.css">
@@ -18,12 +19,12 @@
             <a href="#!" class="brand-logo center">Mi EDS App</a>
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
-                <li><a href="sass.html"><i class="material-icons left">home</i>Inicio</a></li>
-                <li><a href="mobile.html"><i class="material-icons right">exit_to_app</i>Cerrar Sesion</a></li>
+                <li><a href="login.php"><i class="material-icons left">home</i>Inicio</a></li>
+                <!-- <li><a href="mobile.html"><i class="material-icons right">exit_to_app</i>Cerrar Sesion</a></li> -->
             </ul>
             <ul class="side-nav" id="mobile-demo">
-                <li><a href="sass.html"><i class="material-icons right">home</i>Inicio</a></li>
-                <li><a href="mobile.html"><i class="material-icons right">exit_to_app</i>Cerrar Sesion</a></li>
+                <li><a href="login.php"><i class="material-icons right">home</i>Inicio</a></li>
+                <!-- <li><a href="mobile.html"><i class="material-icons right">exit_to_app</i>Cerrar Sesion</a></li> -->
             </ul>
         </div>
     </nav>
@@ -48,23 +49,23 @@
             <div class="col m6 z-depth-1">
                 <h2 class="center-align">Iniciar Sesion</h2>
                 <div class="row">
-                    <form class="col s12" action="controllers/checklogin.php" method="post">
+                    <form class="col m12" action="controllers/checklogin.php" method="post">
                         <div class="row">
-                            <div class="input-field col s12">
+                            <div class="input-field col m12">
                                 <i class="material-icons prefix">account_circle</i>
                                 <input name="username" id="username" type="text" class="validate">
                                 <label for="username">Nombre de usuario</label>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="input-field col s12">
+                            <div class="input-field col m12">
                                 <i class="material-icons prefix">send</i>
                                 <input id="password" name="password" type="password" class="validate">
                                 <label for="pass">Contraseña</label>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col s12">
+                            <div class="col m12">
                                 <p>
                                     <input type="checkbox" id="remember">
                                     <label for="remember">Recordarme</label>
@@ -92,11 +93,11 @@
  <footer class="page-footer #00838f cyan darken-3">
           <div class="container">
             <div class="row">
-              <div class="col l6 s12">
+              <div class="col l6 m12">
                 <h5 class="white-text">Mi eds App</h5>
                 <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
               </div>
-              <div class="col l4 offset-l2 s12">
+              <div class="col l4 offset-l2 m12">
                 <h5 class="white-text">Redes Sociales</h5>
                 <ul>
                   <li><a class="grey-text text-lighten-3" href="#!">Facebook</a></li>

@@ -6,7 +6,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
 } else {
    echo "Bienvenido! " . $_SESSION['username'];
    echo "Esta pagina es solo para usuarios registrados.<br>";
-   echo "<br><a href='login.html'>Login</a>";
+   echo "<br><a href='login.php'>Login</a>";
    echo "<br><br><a href='index.html'>Registrarme</a>";
 
 exit;
@@ -33,7 +33,7 @@ include_once "controllers/config.php"
 <html lang="es">
 
 <head>
-    <title>Iniciar Sesion - Admins - Mi Eds App</title>
+    <title>Admins - Mi Eds App</title>
        <link rel="stylesheet" type="text/css" href="css/mystyle.css">
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/materialize.min.css">
@@ -48,11 +48,11 @@ include_once "controllers/config.php"
             <a href="#!" class="brand-logo center">Mi EDS App</a>
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
-                <li><a href="sass.html"><i class="material-icons left">home</i>Inicio</a></li>
+                <li><a href="dashboard.php"><i class="material-icons left">home</i>Inicio</a></li>
                 <li><a href="controllers/logout.php"><i class="material-icons right">exit_to_app</i>Cerrar Sesion</a></li>
             </ul>
             <ul class="side-nav" id="mobile-demo">
-                <li><a href="sass.html"><i class="material-icons right">home</i>Inicio</a></li>
+                <li><a href="dashboard.php"><i class="material-icons right">home</i>Inicio</a></li>
                 <li><a href="controllers/logout.php"><i class="material-icons right">exit_to_app</i>Cerrar Sesion</a></li>
             </ul>
         </div>
