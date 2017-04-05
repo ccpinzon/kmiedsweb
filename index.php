@@ -8,7 +8,8 @@ include_once "controllers/config.php"
 
 <head>
     <title>Admins - Mi Eds App</title>
-       <link rel="stylesheet" type="text/css" href="css/mystyle.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/mystyle.css">
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/materialize.min.css">
     <meta charset="utf-8">

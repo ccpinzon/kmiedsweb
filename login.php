@@ -5,7 +5,7 @@
 <head>
     <title>Iniciar Sesion - Admins - Mi Eds App</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-       <link rel="stylesheet" type="text/css" href="css/mystyle.css">
+    <link rel="stylesheet" type="text/css" href="css/mystyle.css">
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/materialize.min.css">
     <meta charset="utf-8">
@@ -76,7 +76,7 @@
                         <div class="row">
                             <div class="col m12">
                                 <p class="right-align">
-                                    <button class="btn btn-large waves-effect #00838f cyan darken-3" type="submit" value="LOGIN" name="action">Login</button>
+                                    <button class="btn btn-large waves-effect #00838f cyan darken-3" type="submit" value="LOGIN" name="action">Iniciar Sesion</button>
                                 </p>
                             </div>
                         </div>
