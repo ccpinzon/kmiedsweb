@@ -18,7 +18,7 @@ if($now > $_SESSION['expire']) {
 session_destroy();
 
 echo "Su sesion a terminado,
-<a href='login.html'>Necesita Hacer Login</a>";
+<a href='login.php'>Necesita Hacer Login</a>";
 exit;
 }
 ?>
@@ -68,7 +68,7 @@ include_once "controllers/config.php"
                     <h5><span class="card-title red-text text-darken-3">Buscar estacion de servicio  </span></h5>
                     <form>
                         <div class="input-field">
-                            <input name="search_text" id="search_text" type="search" placeholder="Ingrese ID de la estacion o nombre">
+                            <input name="search_text" id="search_text" type="search" placeholder="Ingrese ID o nombre de la estacion">
                             <label class="label-icon" for="search"><i class="material-icons">search</i></label>
                         </div>
                     </form>
@@ -95,16 +95,19 @@ include_once "controllers/config.php"
                                                                 <tr>
                                                                     <th>ID</th>
                                                                     <th>Nombre</th>
-                                                                    <th>latitud</th>
-                                                                    <th>longitud</th>
-                                                                    <th>mayorista</th>
-                                                                    <th>Estado Pago</th>
+                                                                    <th>Coordenadas</th>
+                                                                    <th>Mayorista</th>
+                                                                    <th>Pago</th>
                                                                     <th>Depto</th>
                                                                     <th>Precios</th>
+                                                                    <th></th>
                                                             
                                                                 </tr>
                                                         </thead>' ;
                                             while($row = mysqli_fetch_array($result)){
+                                            	$varpos = $row["latitud_estacion"].', '.$row["longitud_estacion"];
+
+
                                                 $varpago = '';
                                                 if ($row['pago_estacion'] == 1) {
                                                     $varpago= 'Dorada';
@@ -112,7 +115,7 @@ include_once "controllers/config.php"
                                                     $varpago= 'Normal';
                                                 }
 
-                                            
+                                            	
                                                 $varprecios .=  
                                                                 'Extra: $'.$row["precio_extra"].
                                                                 '<BR> Corriente: $'.$row["precio_corriente"].
@@ -124,18 +127,28 @@ include_once "controllers/config.php"
                                                 $out .= '
                                                     <tbody>
                                                         <tr>
-                                                            <td>'.$row["id_estacion"].'</td>
-                                                            <td>'.$row["nombre_estacion"].'</td>
-                                                            <td>'.$row["latitud_estacion"].'</td>
-                                                            <td>'.$row["longitud_estacion"].'</td>
-                                                            <td>'.$row["marca_mayorista"].'</td>
-                                                            <td>'.$varpago.'</td>
-                                                            <td>'.$row["depto"].'</td>
-                                                            <td>'.$varprecios.'</td>                                                
+                                                        <form action="verestacion.php" method="post">
+	                                                            <td>
+	                                                            	<input type="hidden" name="idest" value='.$row["id_estacion"].' />'.$row["id_estacion"].'
+	                                                            </td>
+	                                                            <td>'.$row["nombre_estacion"].'</td>
+	                                                            <td>'.$varpos.'</td>
+	                                                            <td>'.$row["marca_mayorista"].'</td>
+	                                                            <td>'.$varpago.'</td>
+	                                                            <td>'.$row["depto"].'</td>
+	                                                            <td>'.$varprecios.'</td>
+	                                                            <td>
+	                                                            	<button class="btn waves-effect waves-light" type="submit" name="action">
+	                                                            		ver mas
+	                                                            		<i class="material-icons right">send</i>
+	                                                            	</button>
+	                                                            </td>
+                                                         </form>
                                                         </tr>
                                                     </tbody>
                                                     
                                                 ';
+                                                $varpos = '';
                                                 $varprecios = '';
 
                                             }

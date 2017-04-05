@@ -7,7 +7,7 @@ include_once "controllers/config.php"
 <html lang="es">
 
 <head>
-    <title>Iniciar Sesion - Admins - Mi Eds App</title>
+    <title>Admins - Mi Eds App</title>
        <link rel="stylesheet" type="text/css" href="css/mystyle.css">
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/materialize.min.css">
@@ -22,12 +22,12 @@ include_once "controllers/config.php"
             <a href="#!" class="brand-logo center">Mi EDS App</a>
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
-                <li><a href="sass.html"><i class="material-icons left">home</i>Inicio</a></li>
-                <li><a href="mobile.html"><i class="material-icons right">exit_to_app</i>Cerrar Sesion</a></li>
+                <li><a href="dashboard.php"><i class="material-icons left">home</i>Inicio</a></li>
+                <li><a href="controllers/logout.php"><i class="material-icons right">exit_to_app</i>Cerrar Sesion</a></li>
             </ul>
             <ul class="side-nav" id="mobile-demo">
-                <li><a href="sass.html"><i class="material-icons right">home</i>Inicio</a></li>
-                <li><a href="mobile.html"><i class="material-icons right">exit_to_app</i>Cerrar Sesion</a></li>
+                <li><a href="dashboard.php"><i class="material-icons right">home</i>Inicio</a></li>
+                <li><a href="controllers/logout.php"><i class="material-icons right">exit_to_app</i>Cerrar Sesion</a></li>
             </ul>
         </div>
     </nav>
@@ -36,10 +36,10 @@ include_once "controllers/config.php"
 <!--buscador -->
 <div class="container">
     <div class="row">
-        <div class="col s12">
-            <div class="card blue-grey darken-1">
-                <div class="card-content white-text">
-                    <span class="card-title">Buscar estacion de servicio:  </span>
+        <div class="col l12">
+            <div class="card-panel">
+                <div class="card-content">
+                    <h5><span class="card-title red-text text-darken-3">Buscar estacion de servicio  </span></h5>
                     <form>
                         <div class="input-field">
                             <input name="search_text" id="search_text" type="search" placeholder="Ingrese ID de la estacion o nombre">
@@ -47,7 +47,7 @@ include_once "controllers/config.php"
                         </div>
                     </form>
                     <div id="result">
-                       <h4 align="center"> Resultado de busqueda</h4>
+                       
                         <?php
 
                             include_once "controllers/config.php";
@@ -55,65 +55,78 @@ include_once "controllers/config.php"
                             $out = '';
 
                             $searchby = $_REQUEST['search_text']; 
-                                $sql = "SELECT * FROM listar_estaciones WHERE nombre_estacion  LIKE '%".$searchby."%' OR id_estacion LIKE '%".$searchby."%'";
-                                //$sql = "SELECT * FROM listar_estaciones WHERE nombre_estacion  LIKE '%EDS CE%'";
-                                $result = $conn->query($sql);
+                                if($searchby!=null){
+                                        $sql = "SELECT * FROM listar_estaciones WHERE nombre_estacion  LIKE '%".$searchby."%' OR id_estacion LIKE '%".$searchby."%'";
+                                        //$sql = "SELECT * FROM listar_estaciones WHERE nombre_estacion  LIKE '%EDS CE%'";
+                                        $result = $conn->query($sql);
 
-                                if(mysqli_num_rows($result) > 0 ){
+                                        if(mysqli_num_rows($result) > 0 ){
 
-                                    
-                                    $out .= '<table class="responsive-table highlight">
-                                                <thead>
-                                                    <tr>
-                                                        <th>ID</th>
-                                                        <th>Nombre</th>
-                                                        <th>latitud</th>
-                                                        <th>longitud</th>
-                                                        <th>mayorista</th>
-                                                        <th>Estado Pago</th>
-                                                        <th>Depto</th>
-                                                        <th>precio_extra</th>
-                                                        <th>precio_corriente</th>
-                                                        <th>precio_diesel</th>
-                                                        <th>precio_gnv</th>
-                                                    </tr>
-                                                </thead>' ;
-                                    while($row = mysqli_fetch_array($result)){
-                                        $varpago = '';
-                                        if ($row['pago_estacion'] == 1) {
-                                            $varpago= 'Dorada';
-                                        }else{
-                                            $varpago= 'Normal';
+                                            $varprecios = '';
+                                            $out .= '<h4 align="center" class="red-text text-darken-2"> Resultado de busqueda</h4>
+                                                        <table class="responsive-table highlight">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>ID</th>
+                                                                    <th>Nombre</th>
+                                                                    <th>Latitud</th>
+                                                                    <th>Longitud</th>
+                                                                    <th>Mayorista</th>
+                                                                    <th>Pago</th>
+                                                                    <th>Depto</th>
+                                                                    <th>Precios</th>
+                                                                    <th></th>
+                                                            
+                                                                </tr>
+                                                        </thead>' ;
+                                            while($row = mysqli_fetch_array($result)){
+                                                $varpago = '';
+                                                if ($row['pago_estacion'] == 1) {
+                                                    $varpago= 'Dorada';
+                                                }else{
+                                                    $varpago= 'Normal';
+                                                }
+
+                                                
+                                                $varprecios .=  
+                                                                'Extra: $'.$row["precio_extra"].
+                                                                '<BR> Corriente: $'.$row["precio_corriente"].
+                                                                '<BR> Diesel: $'.$row["precio_diesel"].
+                                                                '<BR> GNV: $'.$row["precio_gnv"].'<BR>'                                               
+                                                                ;
+                                                                                    
+
+                                                $out .= '
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>'.$row["id_estacion"].'</td>
+                                                            <td>'.$row["nombre_estacion"].'</td>
+                                                            <td>'.$row["latitud_estacion"].'</td>
+                                                            <td>'.$row["longitud_estacion"].'</td>
+                                                            <td>'.$row["marca_mayorista"].'</td>
+                                                            <td>'.$varpago.'</td>
+                                                            <td>'.$row["depto"].'</td>
+                                                            <td>'.$varprecios.'</td>
+                                                            <td>
+                                                                <button class="btn waves-effect waves-light" type="submit" name="action">
+                                                                    Editar
+                                                                    <i class="material-icons right">mode_edit</i>
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                    
+                                                ';
+                                                $varprecios = '';
+
+                                            }
+                                            $out .= '</table>';
+                                            echo $out;
+
                                         }
-
-                                                                              
-
-                                        $out .= '
-                                            <tbody>
-                                                <tr>
-                                                    <td>'.$row["id_estacion"].'</td>
-                                                    <td>'.$row["nombre_estacion"].'</td>
-                                                    <td>'.$row["latitud_estacion"].'</td>
-                                                    <td>'.$row["longitud_estacion"].'</td>
-                                                    <td>'.$row["marca_mayorista"].'</td>
-                                                    <td>'.$varpago.'</td>
-                                                    <td>'.$row["depto"].'</td>
-                                                    <td>'."$".$row["precio_extra"].'</td>
-                                                    <td>'."$".$row["precio_corriente"].'</td>
-                                                    <td>'."$".$row["precio_diesel"].'</td>
-                                                    <td>'."$".$row["precio_gnv"].'</td>
-                                                </tr>
-                                            </tbody>
-                                            
-                                        ';
-
-                                    }
-                                    $out .= '</table>';
-                                    echo $out;
-
-                                }
-                                else{
-                                    echo 'No hay Datos';
+                                        else{
+                                            echo 'No hay Datos';
+                                        }
                                 }
                         ?>
                     </div>
@@ -167,24 +180,7 @@ include_once "controllers/config.php"
         })
     </script>
 
-    <!--fin nav lateral responsivo-->
-
-    <!--script buscador ajax-->
-    <!--<script>    
-    
-        $(document).ready(function(){
-            $('#search_text').keyup(function(){
-                var txt = $(this).val();
-                if(txt != '' ){
-                    
-                }else{
-                    alert(txt);
-                }
-            });
-        });
-    
-    </script>-->
-    <!--script buscador ajax-->
+ 
 </body>
 
 </html>
