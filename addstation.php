@@ -35,37 +35,20 @@ include_once "controllers/config.php";;
         }
 ?>
 
-<!DOCTYPE html>
+<?php
 
-<html lang="es">
+$PageTitle="Agregar Estacion";
 
-<head>
-    <title>Admins - Mi Eds App</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="css/mystyle.css">
-    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/materialize.min.css">
-    <meta charset="utf-8">
-</head>
+function customPageHeader(){?>
+  <!--Arbitrary HTML Tags-->
+<?php }
 
-<body>
-    <!--nav-bar-->
+include_once('header.php');
+include_once('nav.php');
 
-    <nav>
-        <div class="nav-wrapper #00838f cyan darken-3">
-            <a href="#!" class="brand-logo center">Mi EDS App</a>
-            <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-            <ul class="right hide-on-med-and-down">
-                <li><a href="dashboard.php"><i class="material-icons left">home</i>Inicio</a></li>
-                <li><a href="controllers/logout.php"><i class="material-icons right">exit_to_app</i>Cerrar Sesion</a></li>
-            </ul>
-            <ul class="side-nav" id="mobile-demo">
-                <li><a href="dashboard.php"><i class="material-icons right">home</i>Inicio</a></li>
-                <li><a href="controllers/logout.php"><i class="material-icons right">exit_to_app</i>Cerrar Sesion</a></li>
-            </ul>
-        </div>
-    </nav>
-
+//body contents go here
+?>
+  
 
 <!-- card panel agregar estacion -->
 
@@ -95,6 +78,12 @@ while ($row = mysqli_fetch_assoc($resMays)) {
 
  ?>
 
+ <?php 
+
+ include 'models/station.php';
+
+?>
+
 <div class="container">
     <div id="basic-form" class="section">
         <div class="row">
@@ -104,19 +93,27 @@ while ($row = mysqli_fetch_assoc($resMays)) {
                             <blockquote class="flow-text">
                                 Datos de la estacion 
                             </blockquote>
-
+                        <!-- FILA 0 -->
                         <input type="hidden" name="idest" value="<?php echo $idest; ?>"/>
+
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="nameeds" name="nameeds" value="" type="text" required>
+                                <label>Nombre de la EDS</label>
+                            </div>
+
+                        </div>
 
                         <!-- FILA 1 -->
 
                         <div class="row">
                            <div class="input-field col s6">
-                                <input id="nameeds" name="nameeds" value="" type="text" />
-                                <label>Nombre de la EDS</label>
+                                <input id="sicom" name="sicom" value="" type="text" required onkeypress="return event.charCode >= 47 && event.charCode <= 57">
+                                <label>N. SICOM</label>
                             </div>
                             <div class="input-field col s6">
 
-                                <select id="selectdepto" name="selectdepto">                                    
+                                <select id="selectdepto" name="selectdepto" required>                                    
                                     <option value="" disabled selected>Seleccione una opcion</option>
                                     <?php 
                                         foreach ($deptos as $iddep => $nomdep) {
@@ -130,12 +127,12 @@ while ($row = mysqli_fetch_assoc($resMays)) {
                         <!-- FILA 2 -->
                         <div class="row">
                            <div class="input-field col s6">
-                                <input id="latitud" name="latitud" value="" type="text" 
+                                <input id="latitud" name="latitud" value="" type="text" required 
                                     onkeypress="return event.charCode >= 45 && event.charCode <= 57">
                                 <label>Latitud</label>
                             </div>
                             <div class="input-field col s6">
-                                <input id="longitud" name="longitud" value="" type="text" 
+                                <input id="longitud" name="longitud" value="" type="text" required 
                                         onkeypress="return event.charCode >= 45 && event.charCode <= 57">
                                 <label>Longitud</label>
                             </div>
@@ -144,7 +141,7 @@ while ($row = mysqli_fetch_assoc($resMays)) {
                         <!-- FILA 3 -->
                         <div class="row">
                            <div class="input-field col s6">                               
-                                <select id="selectmay" name="selectmay">                                    
+                                <select id="selectmay" name="selectmay" required>                                    
                                     <option value="" disabled selected>Seleccione una opcion</option>
                                     <?php 
                                         foreach ($mays as $idmay => $nommay) {
@@ -155,7 +152,7 @@ while ($row = mysqli_fetch_assoc($resMays)) {
                                 <label>Mayorista</label>
                             </div>
                             <div class="input-field col s6">
-                                <select id="selecttypestation" name="selecttypestation">                                    
+                                <select id="selecttypestation" name="selecttypestation" required>                                    
                                     <option value="" disabled selected>Seleccione una opcion</option>
                                     <?php 
                                         $arr_typestation = array(
@@ -193,33 +190,7 @@ while ($row = mysqli_fetch_assoc($resMays)) {
 
 
 <!--fin add station -->
-<!--footer-->
-<main></main>
- <footer class="page-footer #00838f cyan darken-3">
-          <div class="container">
-            <div class="row">
-              <div class="col l6 s12">
-                <h5 class="white-text">Mi eds App</h5>
-                <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
-              </div>
-              <div class="col l4 offset-l2 s12">
-                <h5 class="white-text">Redes Sociales</h5>
-                <ul>
-                  <li><a class="grey-text text-lighten-3" href="#!">Facebook</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Instagram</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="footer-copyright">
-            <div class="container">
-            © 2017 KnowLine S.A.S
-            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
-            </div>
-          </div>
-        </footer>
 
-<!--fin footer-->
 
 
 <!--imports js-->
@@ -232,6 +203,7 @@ while ($row = mysqli_fetch_assoc($resMays)) {
 
             $(".button-collapse").sideNav();
             $('select').material_select();
+            $("select[required]").css({display: "inline", height: 0, padding: 0, width: 0});
 
         })
     </script>
@@ -240,3 +212,6 @@ while ($row = mysqli_fetch_assoc($resMays)) {
 </body>
 
 </html>
+<?php
+include_once('footer.php');
+?>

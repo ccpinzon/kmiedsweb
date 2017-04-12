@@ -1,22 +1,20 @@
 <?php
 include_once "controllers/config.php"
 ?>
+<?php
 
-<!DOCTYPE html>
+$PageTitle="Dashboard";
 
-<html lang="es">
+function customPageHeader(){?>
+  <!--Arbitrary HTML Tags-->
+<?php }
 
-<head>
-    <title>Admins - Mi Eds App</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="css/mystyle.css">
-    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/materialize.min.css">
-    <meta charset="utf-8">
-</head>
+include_once('header.php');
 
-<body>
-    <!--nav-bar-->
+//body contents go here
+?>
+  
+    <!--nav-bar personalizado-->
 
     <nav>
         <div class="nav-wrapper #00838f cyan darken-3">

@@ -1,5 +1,6 @@
 <?php 
 
+
 if (isset($_POST)) {
 	
 	$edsname = $_POST["nameeds"];
@@ -8,9 +9,10 @@ if (isset($_POST)) {
 	$longitud = $_POST["longitud"];
 	$idmay = $_POST["selectmay"];
 	$idtypestation = $_POST["selecttypestation"];
+	$sicom = $_POST["sicom"];
 
 	echo "DATOS DE LA ESTACION: ";
-	echo $edsname.', '.$iddepto.', '.$latitud.', '.$longitud.', '.$idmay.', '.$idtypestation;
+	echo $edsname.', '.$iddepto.', '.$latitud.', '.$longitud.', '.$idmay.', '.$idtypestation.', '.$sicom;
 
 	
 

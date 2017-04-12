@@ -1,18 +1,17 @@
-<!DOCTYPE html>
+<?php
 
-<html lang="es">
+$PageTitle="Inicar Sesion";
 
-<head>
-    <title>Iniciar Sesion - Admins - Mi Eds App</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="css/mystyle.css">
-    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/materialize.min.css">
-    <meta charset="utf-8">
-</head>
+function customPageHeader(){?>
+  <!--Arbitrary HTML Tags-->
+<?php }
 
-<body>
+include_once('header.php');
+
+//body contents go here
+?>
     <!--nav-bar-->
+
 
     <nav>
         <div class="nav-wrapper #00838f cyan darken-3">
@@ -88,33 +87,6 @@
 
     <!-- FIN LOGIN      -->
 
-<!--footer-->
-<main></main>
- <footer class="page-footer #00838f cyan darken-3">
-          <div class="container">
-            <div class="row">
-              <div class="col l6 m12">
-                <h5 class="white-text">Mi eds App</h5>
-                <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
-              </div>
-              <div class="col l4 offset-l2 m12">
-                <h5 class="white-text">Redes Sociales</h5>
-                <ul>
-                  <li><a class="grey-text text-lighten-3" href="#!">Facebook</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Instagram</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="footer-copyright">
-            <div class="container">
-            © 2017 KnowLine S.A.S
-            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
-            </div>
-          </div>
-        </footer>
-
-<!--fin footer-->
 
 
 <!--imports js-->
@@ -134,3 +106,6 @@
 </body>
 
 </html>
+<?php
+include_once('footer.php');
+?>
