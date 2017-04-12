@@ -5,12 +5,13 @@ session_start();
 <?php
 
 include_once "config.php";
-$tbl_name = "user_admin";
+$tbl_name = "usuario";
 
 $username = $_POST['username'];
 $password = $_POST['password'];
 
-$sql = "SELECT * FROM $tbl_name WHERE user = '$username'";
+
+$sql = "SELECT * FROM $tbl_name WHERE nombre_usuario = '$username'";
 
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {     
@@ -18,7 +19,7 @@ if ($result->num_rows > 0) {
  $row = $result->fetch_array(MYSQLI_ASSOC);
  //echo password_hash("user",PASSWORD_DEFAULT).'<BR>';
  //echo $password;
-	if (password_verify($password, $row['hash_password'])) { 
+	if (password_verify($password, $row['pass_usuario'])) { 
 
 		$_SESSION['loggedin'] = true;
 		$_SESSION['username'] = $username;

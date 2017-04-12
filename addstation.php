@@ -78,11 +78,7 @@ while ($row = mysqli_fetch_assoc($resMays)) {
 
  ?>
 
- <?php 
 
- include 'models/station.php';
-
-?>
 
 <div class="container">
     <div id="basic-form" class="section">
@@ -97,9 +93,23 @@ while ($row = mysqli_fetch_assoc($resMays)) {
                         <input type="hidden" name="idest" value="<?php echo $idest; ?>"/>
 
                         <div class="row">
-                            <div class="input-field col s12">
+                            <div class="input-field col s6">
                                 <input id="nameeds" name="nameeds" value="" type="text" required>
                                 <label>Nombre de la EDS</label>
+                            </div>
+
+                            <div class="input-field col s6">
+
+                            <div class="switch">
+                               <label>
+                                 Estandar
+                                 <input type="checkbox" name="statepay">
+                                 <span class="lever"></span>
+                                 Premium
+                               </label>
+                             </div>
+
+
                             </div>
 
                         </div>

@@ -10,7 +10,7 @@ function customPageHeader(){?>
 <?php }
 
 include_once('header.php');
-
+echo password_hash('1234',PASSWORD_DEFAULT);
 //body contents go here
 ?>
   
