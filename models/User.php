@@ -51,7 +51,7 @@ class User {
         
         $databaseManager = new mySQL();
         
-        $getLastUserIdQuery = "INSERT INTO ".self::USERTABLE." (".self::COLUMN_USERNAME.", ".self::COLUMN_USERPASSWORD.", ".self::COLUMN_USERTYPE.") VALUES (".$this->newUser.", ".$this->newPassword.", G)";        
+        $getLastUserIdQuery = "INSERT INTO ".self::USERTABLE." (".self::COLUMN_USERNAME.", ".self::COLUMN_USERPASSWORD.", ".self::COLUMN_USERTYPE.") VALUES (".$this->newUser.", ".$this->newPassword.", 'G')";        
         
         $resultQuery = $databaseManager->querySQL($this->databaseInfo, $getLastUserIdQuery);
         return $this->setArrayData($resultQuery);
