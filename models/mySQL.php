@@ -139,6 +139,11 @@ class mySQL {
     
     function querySQL($databaseInfo, $query){
         
+        $mysqli = new mysqli($databaseInfo['hostname'], $databaseInfo['username'], $databaseInfo['password'], $databaseInfo['name']);
+        if ($mysqli === false){
+            die ("ERROR: No se estableció la conexión. " . mysqli_connect_error());
+        }
+        
         $sql = $query;
 
         if($result = $mysqli->query($sql)){
