@@ -137,4 +137,28 @@ class mySQL {
         }
     }
     
+    function querySQL($databaseInfo, $query){
+        
+        $sql = $query;
+
+        if($result = $mysqli->query($sql)){
+            if($result->num_rows > 0){
+                $rowindex = 0;
+                while($row = $result->fetch_array()) {
+                    for($i = 0; $i <= mysqli_num_fields($result)-1; $i++){
+                        $resultQuery[$rowindex][$i] = $row[$i];
+                    }
+                $rowindex++;    
+                }
+                $result->close();
+            }else{
+                $resultQuery = NULL;
+            }
+        }else{
+            $resultQuery = -3;
+        }
+        $mysqli->close();
+        return $resultQuery;  
+    }
+    
 }
