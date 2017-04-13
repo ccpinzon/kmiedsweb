@@ -26,8 +26,9 @@ class User {
     const COLUMN_USERPASSWORD = "pass_usuario";
     const COLUMN_USERTYPE = "tipo_usuario";
     
-    function __construct() {
+    function __construct($databaseInfo) {
         
+        $this->databaseInfo = $databaseInfo;
         $this->newUser = $this->newUser();
     }
     
