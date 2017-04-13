@@ -145,7 +145,7 @@ class mySQL {
         }
         
         $sql = $query;
-
+        /*
         if($result = $mysqli->query($sql)){
             if($result->num_rows > 0){
                 $rowindex = 0;
@@ -162,8 +162,11 @@ class mySQL {
         }else{
             $resultQuery = -3;
         }
+         * 
+         */
         $mysqli->close();
-        return $resultQuery;  
+        //return $resultQuery;  
+        return $sql; 
     }
     
 }
