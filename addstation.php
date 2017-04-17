@@ -58,11 +58,13 @@ include_once('nav.php');
 $deptos = array();
 
 $resDeptos = $conn->query($sqlDptos);
+
 while ($row = mysqli_fetch_assoc($resDeptos)) {
     // lista de departamentos
     $deptos[$row["id_departamento"]] = $row["nombre_departamento"];
     //
 }
+
 
 // traer mayoristas
 $mays = array();
@@ -178,7 +180,7 @@ while ($row = mysqli_fetch_assoc($resMays)) {
                             </div>
                         </div>
 
-                        <!-- boton editar -->
+                        <!-- boton agregar -->
 
 
                             <div class="row">

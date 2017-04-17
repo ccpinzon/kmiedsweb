@@ -1,4 +1,4 @@
-<?php
+	<?php
 session_start();
 
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
@@ -30,7 +30,7 @@ include_once "controllers/config.php";;
 		// id de la estacion
 	    $idest = $_POST['idest']; 
 
-		$sql = 'SELECT * FROM estacion WHERE id_estacion ='.$idest.'';  
+		$sql = 'SELECT * FROM estaciones WHERE id_estacion ='.$idest.'';  
 		$sqlDptos = 'SELECT * FROM departamento';
 		$sqlMayoristas = 'SELECT id_mayorista,marca_mayorista FROM mayorista ORDER by 1';
 		//id,nombre -> CUN,CUNDIMARCA
