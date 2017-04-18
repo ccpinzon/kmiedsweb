@@ -1,5 +1,6 @@
 <?php 
-include_once '../models/Admin.php'
+include_once '../models/Admin.php';
+include_once '../models/User.php';
 
 if (isset($_POST)) {
 	
@@ -14,31 +15,14 @@ if (isset($_POST)) {
 
 	if(isset($_POST['statepay']) && $_POST['statepay']!="")
 	{
-	    $statepay = 'pago';
+	    $statepay = '1';
 	}else {
-		$statepay = 'nopago';
-	}
+		$statepay = '0';
+}
 
 	// echo $statepay;
 	// echo "DATOS DE LA ESTACION: ";
 	// echo $edsname.', '.$iddepto.', '.$latitud.', '.$longitud.', '.$idmay.', '.$idtypestation.', '.$sicom;
-	$datastation[0] = array(
-		'point('.$longitud.', '.$latitud.')',
-		'"'.$edsname.'"',
-		"NULL",
-		'"'.$idtypestation.'"',
-		"NULL",
-		"NULL",
-		"NULL",
-		"NULL",
-		'"'.$sicom.'"',
-
-
-
-
-
-				);
-
 	$dbinfo = array(
 		'hostname' => 'localhost',
 		'username' => 'juan',
@@ -46,10 +30,41 @@ if (isset($_POST)) {
 		'name' => 'juan_mieds',
 		);
 
-	$admin = new Admin($dbinfo);
+	$user = new User($dbinfo);
+	$userbool = $user->addUser();
+	$userNew = $user->getNewUser();
+
+	echo var_dump($userNew);
+
+	// $datastation[0] = array(
+	// 	'point('.$longitud.', '.$latitud.')',
+	// 	'"'.$edsname.'"',
+	// 	"NULL",
+	// 	'"'.$idtypestation.'"',
+	// 	"NULL",
+	// 	"NULL",
+	// 	"NULL",
+	// 	"NULL",
+	// 	'"'.$sicom.'"',
+	// 	'"'.$statepay.'"',
+	// 	'"1"',
+	// 	'"'.$idmay.'"',
+	// 	'"'.$iddepto.'"',
+	// 	"NULL",
+	// 	"NULL",
 
 
-	$admin->addStations()
+
+
+
+
+	// 			);
+
+
+	// $admin = new Admin($dbinfo);
+
+
+	// $admin->addStations()
 
 	//echo "<meta http-equiv='refresh' content='0;URL=../editstation.php' />";
 }

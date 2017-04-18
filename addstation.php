@@ -44,7 +44,7 @@ function customPageHeader(){?>
 <?php }
 
 include_once('header.php');
-include_once('nav.php');
+include_once('helpers/nav.php');
 
 //body contents go here
 ?>
@@ -58,11 +58,13 @@ include_once('nav.php');
 $deptos = array();
 
 $resDeptos = $conn->query($sqlDptos);
+
 while ($row = mysqli_fetch_assoc($resDeptos)) {
     // lista de departamentos
     $deptos[$row["id_departamento"]] = $row["nombre_departamento"];
     //
 }
+
 
 // traer mayoristas
 $mays = array();
@@ -178,7 +180,7 @@ while ($row = mysqli_fetch_assoc($resMays)) {
                             </div>
                         </div>
 
-                        <!-- boton editar -->
+                        <!-- boton agregar -->
 
 
                             <div class="row">
@@ -223,5 +225,5 @@ while ($row = mysqli_fetch_assoc($resMays)) {
 
 </html>
 <?php
-include_once('footer.php');
+include_once('helpers/footer.php');
 ?>

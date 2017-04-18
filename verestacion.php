@@ -1,4 +1,4 @@
-<?php
+	<?php
 session_start();
 
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
@@ -30,7 +30,7 @@ include_once "controllers/config.php";;
 		// id de la estacion
 	    $idest = $_POST['idest']; 
 
-		$sql = 'SELECT * FROM estacion WHERE id_estacion ='.$idest.'';  
+		$sql = 'SELECT * FROM estaciones WHERE id_estacion ='.$idest.'';  
 		$sqlDptos = 'SELECT * FROM departamento';
 		$sqlMayoristas = 'SELECT id_mayorista,marca_mayorista FROM mayorista ORDER by 1';
 		//id,nombre -> CUN,CUNDIMARCA
@@ -54,20 +54,9 @@ include_once "controllers/config.php";;
 <body>
     <!--nav-bar-->
 
-    <nav>
-        <div class="nav-wrapper #00838f cyan darken-3">
-            <a href="#!" class="brand-logo center">Mi EDS App</a>
-            <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-            <ul class="right hide-on-med-and-down">
-                <li><a href="dashboard.php"><i class="material-icons left">home</i>Inicio</a></li>
-                <li><a href="controllers/logout.php"><i class="material-icons right">exit_to_app</i>Cerrar Sesion</a></li>
-            </ul>
-            <ul class="side-nav" id="mobile-demo">
-                <li><a href="dashboard.php"><i class="material-icons right">home</i>Inicio</a></li>
-                <li><a href="controllers/logout.php"><i class="material-icons right">exit_to_app</i>Cerrar Sesion</a></li>
-            </ul>
-        </div>
-    </nav>
+<?php 
+	include 'helpers/nav.php';
+ ?>
    
 <div class="container">
 
@@ -322,31 +311,11 @@ include_once "controllers/config.php";;
 	</div>
 </div>
 <!--footer-->
-<main></main>
- <footer class="page-footer #00838f cyan darken-3">
-          <div class="container">
-            <div class="row">
-              <div class="col l6 m12">
-                <h5 class="white-text">Mi eds App</h5>
-                <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
-              </div>
-              <div class="col l4 offset-l2 m12">
-                <h5 class="white-text">Redes Sociales</h5>
-                <ul>
-                  <li><a class="grey-text text-lighten-3" href="#!">Facebook</a></li>
-                  <li><a class="grey-text text-lighten-3" href="#!">Instagram</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="footer-copyright">
-            <div class="container">
-            © 2017 KnowLine S.A.S
-            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
-            </div>
-          </div>
-        </footer>
+<?php 
+	
+	include 'helpers/footer.php';
 
+ ?>
 <!--fin footer-->
 
 
