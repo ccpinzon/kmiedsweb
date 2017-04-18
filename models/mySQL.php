@@ -104,6 +104,7 @@ class mySQL {
           
         $columnString = implode(", ", $columnNames);
         $valueString = implode(", ", $values);
+        //echo var_dump($values);
         
         $sql = "INSERT INTO $tableName ($columnString)
         VALUES ($valueString)";
