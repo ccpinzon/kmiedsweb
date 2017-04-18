@@ -1,17 +1,5 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of Admin
- *
- * @author Sergio
- */
-
 include_once 'mySQL.php';
 
 class Admin {
@@ -41,6 +29,7 @@ class Admin {
     function __construct($databaseInfo) {/*Array de la base de datos*/
         $this->databaseInfo = $databaseInfo;
     }
+    
     function addStations($ArrayDataStations){/*Array de dos dimensiones de la lista de datos de la/s estacion/es.*/
         
         $databaseManager = new mySQL;
@@ -80,6 +69,7 @@ class Admin {
         }
         return $resultLog;
     }
+    
     function deleteStation($stationId){
         
         $databaseManager = new mySQL;
@@ -91,6 +81,7 @@ class Admin {
         $resultQuery = $databaseManager->deletemySQL($this->databaseInfo, self::STATIONTABLE, $whereCriterions);
         return $resultQuery;
     }
+    
     function getListStations(){
         
         $databaseManager = new mySQL;

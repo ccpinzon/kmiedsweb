@@ -36,14 +36,15 @@ class mySQL {
     
     function selectmySQL($databaseInfo, $tableNames, $columnNames, $whereCriterions){
         
-        $resultQuery = array();
-        $columnString = implode(", ", $columnNames);
-        $tableString = implode(", ", $tableNames);
-        $assistWork = new GeneralAssist;
         $mysqli = new mysqli($databaseInfo['hostname'], $databaseInfo['username'], $databaseInfo['password'], $databaseInfo['name']);
         if ($mysqli === false){
             die ("ERROR: No se estableció la conexión. " . mysqli_connect_error());
         }
+        
+        $resultQuery = array();
+        $columnString = implode(", ", $columnNames);
+        $tableString = implode(", ", $tableNames);
+        $assistWork = new GeneralAssist;
         
         $whereString = $this->stringSQLConcatCriterion($whereCriterions, " AND ");
         
@@ -114,6 +115,8 @@ class mySQL {
             $mysqli->close();
             return false;
         }
+        
+        return $sql;
     }
     
     function deletemySQL($databaseInfo, $tableName, $whereCriterions){
@@ -145,7 +148,7 @@ class mySQL {
         }
         
         $sql = $query;
-        /*
+        
         if($result = $mysqli->query($sql)){
             if($result->num_rows > 0){
                 $rowindex = 0;
@@ -162,11 +165,9 @@ class mySQL {
         }else{
             $resultQuery = -3;
         }
-         * 
-         */
+         
         $mysqli->close();
-        //return $resultQuery;  
-        return $sql; 
+        return $resultQuery;   
     }
     
 }
