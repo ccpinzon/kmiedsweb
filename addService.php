@@ -31,6 +31,7 @@ include_once "controllers/config.php";;
     if(isset($_POST)){
    
      $sqlTypes  = 'SELECT DISTINCT tipo_servicio FROM servicio';
+     $sqlServices = 'SELECT * FROM servicio';
        
     }
 ?>
@@ -66,63 +67,105 @@ while ($row = mysqli_fetch_assoc($restypes)) {
 
 }
 
-//echo var_dump($types);
+// traer servicios 
+
+$services  =  array();
+
+$resServices = $conn->query($sqlServices);
+
+while ($row = mysqli_fetch_assoc($resServices)) {
+    
+    $services[$row["nombre_servicio"]] = $row["tipo_servicio"];  
+
+}
+
+//echo var_dump($services);
  ?>
 
 
 
-<div class="container">
-    <div id="basic-form" class="section">
-        <div class="row">
-            <div class="col s12 m6 offset-m3">
-                <div class="card-panel">
-                    <form action="controllers/fetchaddservice.php" method="post">
-                            <blockquote class="flow-text">
-                                Datos del Servicio 
-                            </blockquote>
 
-                        <div class="row">
-                            <div class="input-field col s6">
-                                <input id="service" name="service" value="" type="text" required>
-                                <label>Nombre del servicio</label>
-                            </div>
+ <div id="basic-form" class="section">
+    <div class="row">
+        <div class="col s12 m4 offset-m1">
+            <div class="card-panel">
+                <form action="controllers/fetchaddservice.php" method="post">
+                    <blockquote class="flow-text">
+                        Datos del Servicio 
+                    </blockquote>
+
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="service" name="service" value="" type="text" required>
+                            <label>Nombre del servicio</label>
+                        </div>
+
+                        <div class="input-field col s6">
+                            <select id="selecttype" name="selecttype" required>                                    
+                                <option value="" disabled selected>Seleccione una opcion</option>
+                                <?php 
+                                $typeName = '';
+                                foreach ($types as $posType => $type) {
+                                    $typeName = ($type == 'V') ? "Vehicular" : "Clientes";
+
+                                    echo '<option value='.$type.'>'.$typeName.'</option>';
+                                }
+                                ?>
+                            </select>
+                            <label>Tipo de servicio</label>
+                        </div>
+
+                    </div>                      
+                    <!-- boton agregar -->
 
 
-                            <div class="input-field col s6">
-                                <select id="selecttype" name="selecttype" required>                                    
-                                    <option value="" disabled selected>Seleccione una opcion</option>
-                                    <?php 
-                                        $typeName = '';
-                                        foreach ($types as $posType => $type) {
-                                            $typeName = ($type == 'V') ? "Vehicular" : "Clientes";
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <button class="btn cyan waves-effect waves-light right" type="submit" name="action">
+                                Agregar Servicio
+                                <i class="material-icons right">send</i>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- XX -->
 
-                                            echo '<option value='.$type.'>'.$typeName.'</option>';
-                                        }
-                                     ?>
-                                </select>
-                                <label>Tipo de servicio</label>
-                            </div>
-
-                        </div>                      
-                        <!-- boton agregar -->
-
-
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <button class="btn cyan waves-effect waves-light right" type="submit" name="action">
-                                        Agregar Servicio
-                                        <i class="material-icons right">send</i>
-                                    </button>
-                                </div>
-                            </div>
-                        <!-- XX -->
-
-                    </form>
-                </div>
+                </form>
             </div>
         </div>
-    </div>
+
+        <!-- TABLA -->
+        <div class="col s12 m6">
+            <!-- tabla de servicios -->
+            <div class="card-panel">
+                <table class="striped">
+                    <thead>
+                      <tr>
+                          <th>Nombre Servicio</th>
+                          <th>Tipo de Servicio</th>
+                      </tr>
+                  </thead>
+
+                  <tbody>
+
+                    <?php 
+                    $out =  '';
+                    foreach ($services as $nameServ => $typeServ) {
+                        $typeName = ($typeServ == 'V') ? "Vehicular" : "Clientes";
+                        $out .= '<tr>
+                                    <td>'.$nameServ.'</td>
+                                    <td>'.$typeName.'</td>
+                                </tr>';
+                        
+                    }                    
+                    echo $out;
+                ?>
+            </tbody>
+        </table>   
+    </div>                         
 </div>
+</div>
+</div>
+
 
 
 <!--fin add station -->
