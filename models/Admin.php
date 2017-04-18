@@ -24,6 +24,12 @@ class Admin {
     const COLUMN_STATIONTRADEGROUP = "sucursal_gremio_id_gremio";
     const COLUMN_STATIONUSERID = "usuario_id_usuario";
     
+    const PRODUCTABLE = "estacion_has_producto";
+    const COLUMN_PRODUCTID = "producto_id_producto";
+    const COLUMN_PRODUCTSTATIONID = "estacion_id_estacion";
+    const COLUMN_PRODUCTPRICE = "precio_estacion_has_producto";
+    const COLUMN_PRODUCTSTATE = "estado_estacion_has_producto";
+    
     private $databaseInfo = array();
     
     function __construct($databaseInfo) {/*Array de la base de datos*/
@@ -58,6 +64,34 @@ class Admin {
         foreach ($ArrayDataStations as $values) {
             $rowIndex++;
             $resultQuery = $databaseManager->insertmySQL($this->databaseInfo, self::STATIONTABLE, $columnNames, $values);
+            
+            if($resultQuery){
+                $resultLog[]= "Registry ".$values[1]." was successfully.";
+            }else{
+                $resultLog[]= "Registry ".$values[1]." can not be added.";
+                break;
+            }
+     
+        }
+        return $resultLog;
+    }
+    
+    function addProducts($ArrayDataProducts){/*Array de dos dimensiones de la lista de datos de los productos.*/
+        
+        $databaseManager = new mySQL;
+        $rowIndex = 0;
+        $resultLog;
+        
+        $columnNames = array(
+            self::COLUMN_PRODUCTSTATIONID,
+            self::COLUMN_PRODUCTID,
+            self::COLUMN_PRODUCTPRICE,
+            self::COLUMN_PRODUCTSTATE
+        );
+        
+        foreach ($ArrayDataProducts as $values) {
+            $rowIndex++;
+            $resultQuery = $databaseManager->insertmySQL($this->databaseInfo, self::PRODUCTABLE, $columnNames, $values);
             
             if($resultQuery){
                 $resultLog[]= "Registry ".$values[1]." was successfully.";
