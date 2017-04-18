@@ -1,5 +1,6 @@
-include_once 'mySQL.php';
+<?php
 
+include_once 'mySQL.php';
 
 class Station {    
     
