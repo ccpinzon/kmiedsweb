@@ -44,7 +44,7 @@ function customPageHeader(){?>
 <?php }
 
 include_once('header.php');
-include_once('nav.php');
+include_once('helpers/nav.php');
 
 //body contents go here
 ?>
@@ -225,5 +225,5 @@ while ($row = mysqli_fetch_assoc($resMays)) {
 
 </html>
 <?php
-include_once('footer.php');
+include_once('helpers/footer.php');
 ?>
