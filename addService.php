@@ -101,16 +101,10 @@ while ($row = mysqli_fetch_assoc($resServices)) {
                         </div>
 
                         <div class="input-field col s6">
-                            <select id="selecttype" name="selecttype" required>                                    
+                            <select id="selecttype" name="selecttype" required>                                     
                                 <option value="" disabled selected>Seleccione una opcion</option>
-                                <?php 
-                                $typeName = '';
-                                foreach ($types as $posType => $type) {
-                                    $typeName = ($type == 'V') ? "Vehicular" : "Clientes";
-
-                                    echo '<option value='.$type.'>'.$typeName.'</option>';
-                                }
-                                ?>
+                                <option value='V'>Vehicular</option>
+                                <option value='P'>Clientes</option>        
                             </select>
                             <label>Tipo de servicio</label>
                         </div>
