@@ -108,7 +108,7 @@ include_once('helpers/nav.php');
 					<!--CAMPOS DE TEXTO, AGREGAR PRECIO A CADA CATEGORIA -->
 					<div class="row">
 						<div class="input-field col s4">
-							<input id="latitud" name="I" value="" type="text" required>
+							<input id="latitud" name="I" value="" type="text" required onkeypress="return event.charCode >= 47 && event.charCode <= 57">
 							<label>CATEGORIA I</label>
 						</div>
 						<div class="input-field col s4">

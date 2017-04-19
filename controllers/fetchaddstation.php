@@ -65,5 +65,16 @@ if (isset($_POST)) {
 	 $admin = new Admin($dbinfo);
 	 $validate = $admin->addStations($datastation);
 
-	echo "<meta http-equiv='refresh' content='0;URL=../editstation.php' />";
+	 $stationId = $admin->getLastStationId();
+
+
+	 $productData[0] = array('"'.$stationId.'"',"200","0",'"'."D".'"');
+	 $productData[1] = array('"'.$stationId.'"',"201","0",'"'."D".'"');
+	 $productData[2] = array('"'.$stationId.'"',"202","0",'"'."D".'"');
+	 $productData[3] = array('"'.$stationId.'"',"203","0",'"'."D".'"');
+
+	 $addProduct = $admin->addProducts($productData);
+
+
+	echo "<meta http-equiv='refresh' content='0;URL=../dashboard.php' />";
 }
