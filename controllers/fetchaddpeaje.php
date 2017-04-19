@@ -22,7 +22,7 @@ if (isset($_POST)) {
 	//echo $name.', '.$depto.', '.$latitud.', '.$longitud.', '.$identidad.', '.$I.', '.$II.', '.$III.', '.$IV.', '.$V.', '.$VI.', '.$VII;
 
 	
-	$SqlID = 'SELECT * FROM PEAJE WHERE NOMBRE_PEAJE = "'.$name.'"';
+	$SqlID = 'SELECT * FROM peaje WHERE NOMBRE_PEAJE = "'.$name.'"';
 	$resultValidate = $conn->query($SqlID);
 
 	if ($resultValidate->num_rows > 0) {
@@ -30,7 +30,7 @@ if (isset($_POST)) {
 		echo "<a href='../addPeaje.php'>CONTINUAR...</a>";
 
 	}else{
-		$SqlPeaje = 'INSERT INTO PEAJE (ID_ENTIDAD, NOMBRE_PEAJE, 		UBICACION_PEAJE, ID_DEPARTAMENTO) VALUES('.$identidad.', "'.$name.'", '.$ubication.' ,"'.$depto.'");';
+		$SqlPeaje = 'INSERT INTO peaje (ID_ENTIDAD, NOMBRE_PEAJE, 		UBICACION_PEAJE, ID_DEPARTAMENTO) VALUES('.$identidad.', "'.$name.'", '.$ubication.' ,"'.$depto.'");';
 		$conn->query($SqlPeaje);
 
 		$result = $conn->query($SqlID);
