@@ -36,7 +36,7 @@ if (isset($_POST)) {
 
 	//echo var_dump($userNew);
 	$userid = $user->getLastUserId();
-	echo $userid;
+	//echo $userid;
 
 	$datastation[0] = array(
 		'point('.$longitud.', '.$latitud.')', // ubicacion
@@ -75,6 +75,11 @@ if (isset($_POST)) {
 
 	 $addProduct = $admin->addProducts($productData);
 
+	 $passUser = $user->getNewPassword();
+	 $userName = $user->getNewUser();
 
+	 $validateSaveUser = $user->saveUserData($userName,$passUser,"../private/password.xml");
+
+	 //echo var_dump($validateSaveUser);
 	echo "<meta http-equiv='refresh' content='0;URL=../dashboard.php' />";
 }

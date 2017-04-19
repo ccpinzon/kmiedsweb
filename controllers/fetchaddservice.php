@@ -1,14 +1,23 @@
 <?php 
-
+include_once '../models/Admin.php';
 if (isset($_POST)) {
 	
-	$service = $_POST["service"];
+	$name = $_POST["service"];
 	$selecttype = $_POST["selecttype"];
 
-	echo $service.', '.$selecttype;
+	$dbinfo = array(
+		'hostname' => 'localhost',
+		'username' => 'juan',
+		'password' => '123',
+		'name' => 'juan_mieds',
+		);
+
+	$admin = new Admin($dbinfo);
+
+	$service[0]  = array('"'.$name.'"','"'.$selecttype.'"');
+	$addservice = $admin->addServices($service);
+	echo "<meta http-equiv='refresh' content='0;URL=../addService.php' />";
+
 }
-
-
-
 
 ?>
