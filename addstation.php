@@ -107,7 +107,7 @@ while ($row = mysqli_fetch_assoc($resMays)) {
                                  Estandar
                                  <input type="checkbox" name="statepay">
                                  <span class="lever"></span>
-                                 Premium
+                                 Dorada
                                </label>
                              </div>
 
