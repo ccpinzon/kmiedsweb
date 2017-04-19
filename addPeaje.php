@@ -32,6 +32,9 @@ include_once "controllers/configDBpeaje.php";
    
 	 $sqlDptos  = 'SELECT * FROM departamento order by 2';
 	 $resultDeptos = $conn->query($sqlDptos) or die('Consulta fallida: '.mysql_error());
+
+	 $sqlEntidad  = 'SELECT * FROM entidad';
+	 $resultEntidad = $conn->query($sqlEntidad) or die('Consulta fallida: '.mysql_error());
 	 
 	}
 
@@ -64,12 +67,12 @@ include_once('helpers/nav.php');
 					</blockquote>
 					<!-- FILA 0 -->
 					<div class="row">
-						<div class="input-field col s6">
+						<div class="input-field col s4">
 							<input id="name" name="name" value="" type="text" required>
 							<label>Nombre</label>
 						</div>
 						
-						 <div class="input-field col s6">
+						 <div class="input-field col s4">
 
 								<select id="selectdepto" name="selectdepto" required>                                    
 									<option value="" disabled selected>Seleccione una opcion</option>
@@ -84,6 +87,22 @@ include_once('helpers/nav.php');
 								</select> 
 								<label>Departamento</label>
 							</div>	
+
+							 <div class="input-field col s4">
+
+								<select id="selectenitdad" name="selectenitdad" required>                                    
+									<option value="" disabled selected>Seleccione una opcion</option>
+									
+									<?php 
+
+										while ($row = mysqli_fetch_assoc($resultEntidad) ) {
+											echo '<option value="'.$row["ID_ENTIDAD"].'">'.$row["ENTIDAD"].'</option>';
+											//echo var_dump($row);
+										}
+									 ?>								
+								</select> 
+								<label>Entidad</label>
+							</div>	
 					</div>
 					<div class="row">
 						<div class="input-field col s6">
@@ -91,7 +110,7 @@ include_once('helpers/nav.php');
 							<label>Latitud</label>
 						</div>
 						<div class="input-field col s6">
-							<input id="longitud" name="longitud" value="" type="text" required  onkeypress="return event.charCode >= 47 && event.charCode <= 57">
+							<input id="longitud" name="longitud" value="" type="text" required  onkeypress="return event.charCode >= 45 && event.charCode <= 57">
 							<label>Longitud</label>
 						</div>
 					</div>
@@ -149,17 +168,92 @@ include_once('helpers/nav.php');
 						</div>
 					</div>
 				</div>		
-			
-					<!-- XX -->
-
 				</form>
 			</div>
-		</div>
-		<!-- DATOS TABLA -->    
+		</div>  
 	</div>
 </div>
 
-<!--fin add station -->
+<?php 
+	$listPeaje = 'SELECT * FROM listar_peajes';
+	$resultPeajes = $conn->query($listPeaje) or die('Consulta fallida: '.mysql_error());
+ ?>
+
+
+<div id="basic-form" class="section">
+	<div class="row">
+		<div class="col l10 offset-l1">
+			<div class="card-panel">
+			<table class="striped">
+				<thead>
+					<tr>
+						<th>
+							Departamento
+						</th>
+						<th>
+							Peaje
+						</th>
+						<th>
+							Coordenadas
+						</th>
+						<th>
+							Categoria I
+						</th>
+						<th>
+							Categoria II
+						</th>
+						<th>
+							Categoria III
+						</th>
+						<th>
+							Categoria IV
+						</th>
+						<th>
+							Categoria V
+						</th>
+						<th>
+							Categoria VI
+						</th>
+						<th>
+							Categoria VII
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php 
+
+					$out = '';
+
+					while ($row = mysqli_fetch_assoc($resultPeajes) ) {
+						
+						$coord = $row["latitud"].', '.$row["longitud"];
+
+						$out .= '<tr>
+									<td>'.$row["DEPARTAMENTO"].'</td>
+									<td>'.$row["NOMBRE_PEAJE"].'</td>
+									<td>'.$coord.'</td>
+									<td>'.$row["cat_I"].'</td>
+									<td>'.$row["cat_II"].'</td>
+									<td>'.$row["cat_III"].'</td>
+									<td>'.$row["cat_IV"].'</td>
+									<td>'.$row["cat_V"].'</td>
+									<td>'.$row["cat_VI"].'</td>
+									<td>'.$row["cat_VII"].'</td>
+								</tr>';
+						}
+					echo $out;
+					?>
+
+				</tbody>
+			</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
 
 <!--imports js-->
 	<script type="text/javascript" src="js/jquery.js"></script>
