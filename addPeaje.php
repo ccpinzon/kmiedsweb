@@ -58,7 +58,7 @@ include_once('helpers/nav.php');
 	<div class="row">
 		<div class="col l6 offset-l3">
 			<div class="card-panel">
-				<form action="controllers/fetchaddmayorista.php" method="post">
+				<form action="controllers/fetchaddpeaje.php" method="post">
 					<blockquote class="flow-text">
 						DATOS DEL PEAJE 
 					</blockquote>
@@ -87,11 +87,11 @@ include_once('helpers/nav.php');
 					</div>
 					<div class="row">
 						<div class="input-field col s6">
-							<input id="latitud" name="latitud" value="" type="text" required>
+							<input id="latitud" name="latitud" value="" type="text" required  onkeypress="return event.charCode >= 45 && event.charCode <= 57">
 							<label>Latitud</label>
 						</div>
 						<div class="input-field col s6">
-							<input id="longitud" name="longitud" value="" type="text" required>
+							<input id="longitud" name="longitud" value="" type="text" required  onkeypress="return event.charCode >= 47 && event.charCode <= 57">
 							<label>Longitud</label>
 						</div>
 					</div>
@@ -108,32 +108,32 @@ include_once('helpers/nav.php');
 					<!--CAMPOS DE TEXTO, AGREGAR PRECIO A CADA CATEGORIA -->
 					<div class="row">
 						<div class="input-field col s4">
-							<input id="latitud" name="I" value="" type="text" required onkeypress="return event.charCode >= 47 && event.charCode <= 57">
+							<input id="I" name="I" value="" type="text"  onkeypress="return event.charCode >= 47 && event.charCode <= 57">
 							<label>CATEGORIA I</label>
 						</div>
 						<div class="input-field col s4">
-							<input id="longitud" name="II" value="" type="text" required>
+							<input id="II" name="II" value="" type="text"  onkeypress="return event.charCode >= 47 && event.charCode <= 57">
 							<label>CATEGORIA II </label>
 						</div>
 						<div class="input-field col s4">
-							<input id="longitud" name="III" value="" type="text" required>
+							<input id="III" name="III" value="" type="text"  onkeypress="return event.charCode >= 47 && event.charCode <= 57">
 							<label>CATEGORIA III </label>
 						</div>
 
 						<div class="input-field col s4">
-							<input id="latitud" name="IV" value="" type="text" required>
+							<input id="IV" name="IV" value="" type="text"  onkeypress="return event.charCode >= 47 && event.charCode <= 57">
 							<label>CATEGORIA IV</label>
 						</div>
 						<div class="input-field col s4">
-							<input id="longitud" name="V" value="" type="text" required>
+							<input id="V" name="V" value="" type="text"  onkeypress="return event.charCode >= 47 && event.charCode <= 57">
 							<label>CATEGORIA V </label>
 						</div>
 						<div class="input-field col s4">
-							<input id="longitud" name="VI" value="" type="text" required>
+							<input id="VI" name="VI" value="" type="text"  onkeypress="return event.charCode >= 47 && event.charCode <= 57">
 							<label>CATEGORIA VI </label>
 						</div>
 						<div class="input-field col s4">
-							<input id="longitud" name="VII" value="" type="text" required>
+							<input id="VII" name="VII" value="" type="text"  onkeypress="return event.charCode >= 47 && event.charCode <= 57">
 							<label>CATEGORIA VII </label>
 						</div>
 					</div>
@@ -143,7 +143,7 @@ include_once('helpers/nav.php');
 					<div class="row">
 						<div class="input-field col s12">
 							<button class="btn cyan waves-effect waves-light right" type="submit" name="action">
-								Agregar Mayorista
+								Agregar Peaje
 								<i class="material-icons right">send</i>
 							</button>
 						</div>
