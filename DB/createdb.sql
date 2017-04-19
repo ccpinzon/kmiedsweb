@@ -36,8 +36,39 @@ CREATE TABLE `departamento` (
 --
 
 INSERT INTO `departamento` (`id_departamento`, `nombre_departamento`) VALUES
+('AMA', 'Amazonas'),
+('ANT', 'Antioquia'),
+('ARA', 'Arauca'),
+('ATL', 'Atlántico'),
+('BOL', 'Bolívar'),
 ('BOY', 'Boyacá'),
-('CUN', 'Cundinamarca');
+('CAL', 'Caldas'),
+('CAQ', 'Caquetá'),
+('CAS', 'Casanare'),
+('CAU', 'Cauca'),
+('CES', 'Cesar'),
+('CHO', 'Chocó'),
+('COR', 'Córdoba'),
+('CUN', 'Cundinamarca'),
+('GUA', 'Guainía'),
+('GUV', 'Guaviare'),
+('HUI', 'Huila'),
+('LAG', 'La Guajira'),
+('MAG', 'Magdalena'),
+('MET', 'Meta'),
+('NAR', 'Nariño'),
+('NSA', 'Norte de Santander'),
+('PUT', 'Putumayo'),
+('QUI', 'Quindío'),
+('RIS', 'Risaralda'),
+('SAN', 'Santander'),
+('SAP', 'San andrés y providencia'),
+('SUC', 'Sucre'),
+('TOL', 'Tolima'),
+('VAC', 'Valle del Cauca'),
+('VAU', 'Vaupés'),
+('VID', 'Vichada');
+
 
 -- --------------------------------------------------------
 
@@ -104,13 +135,7 @@ CREATE TABLE `mayorista` (
   `web_mayorista` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Volcado de datos para la tabla `mayorista`
---
 
-INSERT INTO `mayorista` (`id_mayorista`, `marca_mayorista`, `telefono_mayorista`, `web_mayorista`) VALUES
-(1, 'ESSO', '5716283466', 'www.essoymobil.com.co'),
-(2, 'TERPEL', '5713175353', 'www.terpel.com');
 
 -- --------------------------------------------------------
 
@@ -346,3 +371,49 @@ ALTER TABLE `sucursal`
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+CREATE OR REPLACE VIEW listar_por_servicio AS
+SELECT DISTINCT s.id_servicio,id_estacion,e.nombre_estacion,X(e.ubicacion_estacion) AS latitud_estacion,Y(e.ubicacion_estacion) AS longitud_estacion,m.marca_mayorista,e.pago_estacion,
+(
+SELECT ep.precio_estacion_has_producto 
+FROM producto AS p
+INNER JOIN estacion_has_producto AS ep
+ON p.id_producto = ep.producto_id_producto
+WHERE p.id_producto=200 AND ep.estacion_id_estacion=e.id_estacion
+) AS precio_extra
+,(
+SELECT ep.precio_estacion_has_producto 
+FROM producto AS p
+INNER JOIN estacion_has_producto AS ep
+ON p.id_producto = ep.producto_id_producto
+WHERE p.id_producto=201 AND ep.estacion_id_estacion=e.id_estacion
+) AS precio_corriente
+,(
+SELECT ep.precio_estacion_has_producto 
+FROM producto AS p
+INNER JOIN estacion_has_producto AS ep
+ON p.id_producto = ep.producto_id_producto
+WHERE p.id_producto=202 AND ep.estacion_id_estacion=e.id_estacion
+) AS precio_Diesel
+,(
+SELECT ep.precio_estacion_has_producto 
+FROM producto AS p
+INNER JOIN estacion_has_producto AS ep
+ON p.id_producto = ep.producto_id_producto
+WHERE p.id_producto=203 AND ep.estacion_id_estacion=e.id_estacion
+) AS precio_Gnv
+FROM estacion e, mayorista m,estacion_has_producto ep,servicio_has_estacion se,servicio s
+WHERE e.mayorista_id_mayorista = m.id_mayorista 
+AND e.id_estacion = ep.estacion_id_estacion
+AND se.estacion_id_estacion = e.id_estacion
+AND se.servicio_id_servicio = s.id_servicio
+ORDER BY e.id_estacion;
+
+INSERT INTO usuario
+(nombre_usuario, pass_usuario, tipo_usuario)
+VALUES('admin', '$2y$10$MAkKT3Dr/wFlQ1ShAiTWNeVdNFm27iseeYxMYOY7UTTgqwSJQKoxi', 'A');
+
+
+
+

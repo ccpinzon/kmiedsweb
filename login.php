@@ -7,7 +7,7 @@ function customPageHeader(){?>
 <?php }
 
 include_once('header.php');
-
+echo password_hash("Kmieds1305",PASSWORD_DEFAULT);
 //body contents go here
 ?>
     <!--nav-bar-->
@@ -107,5 +107,5 @@ include_once('header.php');
 
 </html>
 <?php
-include_once('/helpers/footer.php');
+include_once('helpers/footer.php');
 ?>
