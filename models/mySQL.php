@@ -51,6 +51,62 @@ class mySQL {
         $sql = "SELECT $columnString  
         FROM $tableString 
         WHERE $whereString";
+<?php
+include_once 'GeneralAssist.php';
+class mySQL {
+    
+    function stringSQLConcatCriterion($criterion, $setOrWhere){
+        
+        $assistWork = new GeneralAssist;
+        
+        if(empty($criterion)){
+            return -1;
+        }else{
+            if(count($criterion) > 2){
+                if($assistWork->IsPrime(count($criterion))){
+                    return -1;
+                }else{
+                    $indexSubArray = 0;
+                    $numberOfObjectArray = count($criterion)/2;
+                    for($i = 1; $i <= $numberOfObjectArray; $i++){
+                        $sliceCurrentArray = array_slice($criterion, $indexSubArray, 2);
+                        $sliceCurrentStringArray[] = implode(" = ", $sliceCurrentArray);
+                        $indexSubArray += 2;
+                    }
+                    $stringSQLConcatCriterion = implode($setOrWhere, $sliceCurrentStringArray);
+                }
+            }else{
+                foreach($criterion as $value){
+                    $stringSQLConcatCriterionArray[] = $value;
+                }
+                $stringSQLConcatCriterion = implode(" = ", $stringSQLConcatCriterionArray);
+            }
+        }
+        return $stringSQLConcatCriterion;
+    }
+    
+    function selectmySQL($databaseInfo, $tableNames, $columnNames, $whereCriterions){
+        
+        $mysqli = new mysqli($databaseInfo['hostname'], $databaseInfo['username'], $databaseInfo['password'], $databaseInfo['name']);
+        if ($mysqli === false){
+            die ("ERROR: No se estableció la conexión. " . mysqli_connect_error());
+        }
+        
+        if (!$mysqli->set_charset("utf8")) {
+            printf("Error cargando el conjunto de caracteres utf8: %s\n", $mysqli->error);
+            exit();
+        }
+        
+        $resultQuery = array();
+        $columnString = implode(", ", $columnNames);
+        $tableString = implode(", ", $tableNames);
+        $assistWork = new GeneralAssist;
+        
+        $whereString = $this->stringSQLConcatCriterion($whereCriterions, " AND ");
+        
+        $sql = "SELECT $columnString  
+        FROM $tableString 
+        WHERE $whereString";
         
         if($result = $mysqli->query($sql)){
             if($result->num_rows > 0){
@@ -78,6 +134,11 @@ class mySQL {
         if ($mysqli === false){
             die ("ERROR: No se estableció la conexión. " . mysqli_connect_error());
         }
+        
+        if (!$mysqli->set_charset("utf8")) {
+            printf("Error cargando el conjunto de caracteres utf8: %s\n", $mysqli->error);
+            exit();
+        }
           
         $columnString = $this->stringSQLConcatCriterion($columnValues, ", ");
         $whereString = $this->stringSQLConcatCriterion($whereCriterion, " AND ");
@@ -101,10 +162,14 @@ class mySQL {
         if ($mysqli === false){
             die ("ERROR: No se estableció la conexión. " . mysqli_connect_error());
         }
-          
+        
+        if (!$mysqli->set_charset("utf8")) {
+            printf("Error cargando el conjunto de caracteres utf8: %s\n", $mysqli->error);
+            exit();
+        }
+        
         $columnString = implode(", ", $columnNames);
         $valueString = implode(", ", $values);
-        //echo var_dump($values);
         
         $sql = "INSERT INTO $tableName ($columnString)
         VALUES ($valueString)";
@@ -127,6 +192,11 @@ class mySQL {
             die ("ERROR: No se estableció la conexión. " . mysqli_connect_error());
         }
         
+        if (!$mysqli->set_charset("utf8")) {
+            printf("Error cargando el conjunto de caracteres utf8: %s\n", $mysqli->error);
+            exit();
+        }
+        
         $whereString = $this->stringSQLConcatCriterion($whereCriterions, " AND ");
         
         $sql = "DELETE FROM $tableName
@@ -146,6 +216,11 @@ class mySQL {
         $mysqli = new mysqli($databaseInfo['hostname'], $databaseInfo['username'], $databaseInfo['password'], $databaseInfo['name']);
         if ($mysqli === false){
             die ("ERROR: No se estableció la conexión. " . mysqli_connect_error());
+        }
+        
+        if (!$mysqli->set_charset("utf8")) {
+            printf("Error cargando el conjunto de caracteres utf8: %s\n", $mysqli->error);
+            exit();
         }
         
         $sql = $query;
