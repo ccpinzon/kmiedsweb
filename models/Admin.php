@@ -30,6 +30,16 @@ class Admin {
     const COLUMN_PRODUCTPRICE = "precio_estacion_has_producto";
     const COLUMN_PRODUCTSTATE = "estado_estacion_has_producto";
     
+    const SERVICETABLE = "servicio";
+    const COLUMN_SERVICEID = "id_servicio";
+    const COLUMN_SERVICENAME = "nombre_servicio";
+    const COLUMN_SERVICETYPE = "tipo_servicio";
+    
+    const SUPPLIERTABLE = "mayorista";
+    const COLUMN_SUPPLIERBRAND = "marca_mayorista";
+    const COLUMN_SUPPLIERPHONE = "telefono_mayorista";
+    const COLUMN_SUPPLIERWEBPAGE = "web_mayorista";
+    
     private $databaseInfo = array();
     
     function __construct($databaseInfo) {/*Array de la base de datos*/
@@ -107,6 +117,59 @@ class Admin {
                 $resultLog[]= "Registry ".$values[1]." was successfully.";
             }else{
                 $resultLog[]= "Registry ".$values[1]." can not be added.";
+                break;
+            }
+     
+        }
+        return $resultLog;
+    }
+    
+    function addServices($ArrayDataServices){/*Array de dos dimensiones de la lista de datos de los servicios.*/
+        
+        $databaseManager = new mySQL;
+        $rowIndex = 0;
+        $resultLog;
+        
+        $columnNames = array(
+            self::COLUMN_SERVICENAME,
+            self::COLUMN_SERVICETYPE
+        );
+        
+        foreach ($ArrayDataServices as $values) {
+            $rowIndex++;
+            $resultQuery = $databaseManager->insertmySQL($this->databaseInfo, self::SERVICETABLE, $columnNames, $values);
+            
+            if($resultQuery){
+                $resultLog[]= "Registry ".$values[0]." was successfully.";
+            }else{
+                $resultLog[]= "Registry ".$values[0]." can not be added.";
+                break;
+            }
+     
+        }
+        return $resultLog;
+    }
+    
+    function addSuppliers($ArrayDataSuppliers){/*Array de dos dimensiones de la lista de datos de los mayoristas.*/
+        
+        $databaseManager = new mySQL;
+        $rowIndex = 0;
+        $resultLog;
+        
+        $columnNames = array(
+            self::COLUMN_SUPPLIERBRAND,
+            self::COLUMN_SUPPLIERPHONE,
+            self::COLUMN_SUPPLIERWEBPAGE
+        );
+        
+        foreach ($ArrayDataSuppliers as $values) {
+            $rowIndex++;
+            $resultQuery = $databaseManager->insertmySQL($this->databaseInfo, self::SUPPLIERTABLE, $columnNames, $values);
+            
+            if($resultQuery){
+                $resultLog[]= "Registry ".$values[0]." was successfully.";
+            }else{
+                $resultLog[]= "Registry ".$values[0]." can not be added.";
                 break;
             }
      
