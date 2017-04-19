@@ -36,6 +36,16 @@ class Admin {
         $this->databaseInfo = $databaseInfo;
     }
     
+    function setArrayData($stationArrayData){
+        
+        foreach ($stationArrayData as $row) {
+            foreach ($row as $dataArray) {
+                $data = $dataArray;
+            }
+        }
+        return $data;
+    }
+    
     function addStations($ArrayDataStations){/*Array de dos dimensiones de la lista de datos de la/s estacion/es.*/
         
         $databaseManager = new mySQL;
@@ -114,6 +124,16 @@ class Admin {
         
         $resultQuery = $databaseManager->deletemySQL($this->databaseInfo, self::STATIONTABLE, $whereCriterions);
         return $resultQuery;
+    }
+    
+    function getLastStationId(){
+        
+        $databaseManager = new mySQL();
+        
+        $getLastUserIdQuery = "SELECT ".self::COLUMN_STATIONID." FROM ".self::STATIONTABLE." ORDER BY 1 DESC LIMIT 1";
+        
+        $resultQuery = $databaseManager->querySQL($this->databaseInfo, $getLastUserIdQuery);
+        return $this->setArrayData($resultQuery);
     }
     
     function getListStations(){
